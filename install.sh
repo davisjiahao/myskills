@@ -18,7 +18,7 @@ NC='\033[0m' # No Color
 
 # Parse arguments
 INSTALL_CLAUDE=false
-INSTALL_OPENCODE=false
+INSTALL_OPENCLAW=false
 INSTALL_CLINE=false
 INSTALL_ALL=false
 
@@ -27,14 +27,14 @@ show_usage() {
     echo ""
     echo "Options:"
     echo "  --claude       Install to Claude Code"
-    echo "  --opencode     Install to OpenCode"
+    echo "  --openclaw     Install to OpenClaw"
     echo "  --cline        Install to Cline (VS Code)"
     echo "  --all          Install to all supported clients"
     echo "  -h, --help     Show this help message"
     echo ""
     echo "Examples:"
     echo "  $0 --claude              # Install to Claude Code only"
-    echo "  $0 --opencode            # Install to OpenCode only"
+    echo "  $0 --openclaw            # Install to OpenClaw only"
     echo "  $0 --all                 # Install to all clients"
     echo "  $0                       # Interactive mode (prompt for each)"
 }
@@ -46,8 +46,8 @@ while [[ $# -gt 0 ]]; do
             INSTALL_CLAUDE=true
             shift
             ;;
-        --opencode)
-            INSTALL_OPENCODE=true
+        --openclaw)
+            INSTALL_OPENCLAW=true
             shift
             ;;
         --cline)
@@ -71,7 +71,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # If no options specified, run interactive mode
-if [ "$INSTALL_CLAUDE" = false ] && [ "$INSTALL_OPENCODE" = false ] && [ "$INSTALL_CLINE" = false ] && [ "$INSTALL_ALL" = false ]; then
+if [ "$INSTALL_CLAUDE" = false ] && [ "$INSTALL_OPENCLAW" = false ] && [ "$INSTALL_CLINE" = false ] && [ "$INSTALL_ALL" = false ]; then
     echo -e "${BLUE}Interactive Installation Mode${NC}"
     echo ""
 
@@ -81,10 +81,10 @@ if [ "$INSTALL_CLAUDE" = false ] && [ "$INSTALL_OPENCODE" = false ] && [ "$INSTA
         INSTALL_CLAUDE=true
     fi
 
-    read -p "Install to OpenCode? (y/n) " -n 1 -r
+    read -p "Install to OpenClaw? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        INSTALL_OPENCODE=true
+        INSTALL_OPENCLAW=true
     fi
 
     read -p "Install to Cline? (y/n) " -n 1 -r
@@ -97,7 +97,7 @@ fi
 # If --all flag is set
 if [ "$INSTALL_ALL" = true ]; then
     INSTALL_CLAUDE=true
-    INSTALL_OPENCODE=true
+    INSTALL_OPENCLAW=true
     INSTALL_CLINE=true
 fi
 
@@ -112,15 +112,15 @@ install_to_claude() {
     echo -e "${GREEN}✓ Claude Code: $TARGET_DIR${NC}"
 }
 
-install_to_opencode() {
-    local TARGET_DIR="$HOME/.opencode/skills/$SKILL_NAME"
-    echo -e "${GREEN}Installing to OpenCode...${NC}"
+install_to_openclaw() {
+    local TARGET_DIR="$HOME/.openclaw/skills/$SKILL_NAME"
+    echo -e "${GREEN}Installing to OpenClaw...${NC}"
 
     mkdir -p "$TARGET_DIR/scripts"
     cp -r "$SCRIPT_DIR/skills/$SKILL_NAME/"* "$TARGET_DIR/"
     chmod +x "$TARGET_DIR/scripts/zhipu-search.py"
 
-    echo -e "${GREEN}✓ OpenCode: $TARGET_DIR${NC}"
+    echo -e "${GREEN}✓ OpenClaw: $TARGET_DIR${NC}"
 }
 
 install_to_cline() {
@@ -148,8 +148,8 @@ if [ "$INSTALL_CLAUDE" = true ]; then
     INSTALLED_ANY=true
 fi
 
-if [ "$INSTALL_OPENCODE" = true ]; then
-    install_to_opencode
+if [ "$INSTALL_OPENCLAW" = true ]; then
+    install_to_openclaw
     INSTALLED_ANY=true
 fi
 
@@ -182,6 +182,6 @@ echo -e "${GREEN}Installation complete!${NC}"
 echo ""
 echo "Usage:"
 echo "  ~/.claude/skills/zhipu-web-search/scripts/zhipu-search.py \"query\"    # Claude Code"
-echo "  ~/.opencode/skills/zhipu-web-search/scripts/zhipu-search.py \"query\"  # OpenCode"
+echo "  ~/.openclaw/skills/zhipu-web-search/scripts/zhipu-search.py \"query\"  # OpenClaw"
 echo ""
 echo "Or use via /zhipu-web-search skill in your AI client"
