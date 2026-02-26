@@ -6,7 +6,7 @@
 
 - 🌐 **实时网络搜索** - 获取最新新闻、技术动态和实时信息
 - 🔍 **中英文支持** - 同时支持中文和英文搜索
-- 🤖 **多客户端支持** - 兼容 Claude Code、OpenClaw、Cline 等 AI 编码助手
+- 🤖 **多客户端支持** - 兼容 Claude Code、OpenCode、Cline 等 AI 编码助手
 - ⚡ **轻量级** - 基于 Python + curl，无复杂依赖
 - 📦 **一键安装** - 提供自动化安装脚本
 
@@ -38,7 +38,7 @@ cd myskills
 | 选项 | 说明 |
 |------|------|
 | `--claude` | 安装到 Claude Code (`~/.claude/skills/`) |
-| `--openclaw` | 安装到 OpenClaw (`~/.openclaw/skills/`) |
+| `--opencode` | 安装到 OpenCode (`~/.opencode/skills/`) |
 | `--cline` | 安装到 Cline (`~/.cline/skills/`) |
 | `--all` | 安装到所有支持的客户端 |
 | `-h, --help` | 显示帮助信息 |
@@ -61,7 +61,7 @@ export BIGMODEL_API_KEY="your_api_key"
 
 ### 在 AI 编码助手中使用
 
-安装后，在 Claude Code / OpenClaw 等助手中可以直接请求网络搜索：
+安装后，在 Claude Code / OpenCode 等助手中可以直接请求网络搜索：
 
 ```
 请搜索最新的 React 19 特性
